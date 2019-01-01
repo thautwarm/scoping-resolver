@@ -7,7 +7,7 @@ like, "is this closure a coroutine/generator/async generator?" and so on.
 
 More about Python's scoping, check [code object](https://github.com/Xython/YAPyPy/blob/master/python-internals/code-object.md).
 
-`Symbol-Resolver` could be leveraged to implement transpilers from Python to another language with hygienic scopes,
+`Symbol-Resolver` could be leveraged to implement transpilers from Python to another language without missing hygienic scopes,
 like [Tensorflow AutoGraph](https://www.tensorflow.org/guide/autograph) and [Numba AutoJit](http://numba.pydata.org/numba-doc/latest/reference/jit-compilation.html#jit-functions):
 
 ```python
@@ -48,7 +48,7 @@ def ufunc(x):
 Now you cannot expect `func` as an external function, but you might not want to check the symbol manually by implementing
 your specific symbol analyzer.
 
-Tensorflow team is still struggling with above problem, you can something unhygienic in following link:
+Tensorflow team is still struggling with above problem, you can see something unhygienic in following link:
 
 https://github.com/tensorflow/tensorflow/blob/3ae375aa92fbb6155f82393735d0b98d8fb9c1b2/tensorflow/python/autograph/converters/lists.py#L129
 
