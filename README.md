@@ -105,6 +105,3 @@ class TestSimple(unittest.TestCase):
         self.assertEqual(type(def_f.node), ast.FunctionDef)
         self.assertIn('c', def_f.scope.analyzed.bounds)
 ```
-=======
-# scoping-resolver
-Resolve python's scoping.
