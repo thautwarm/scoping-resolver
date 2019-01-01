@@ -57,7 +57,7 @@ Usage
 
 Check `test/test_simple.py`.
 
-The `AstTagger` converts any ASTs that lead to a new context into a wrapped AST node named `ScopedAst`, where all
+The `AstTagger` converts any AST that lead to a new context into a wrapped node named `ScopedAst`, where all
 the information about current context is held.
 
 ```python
