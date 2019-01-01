@@ -24,7 +24,7 @@ In above codes, `func` is resolved to be a `global` variable, in other words,
 you can then search the name `func` from global context from current module,
 and make sure it's exactly the `func` object that is the expected external function.
 
-If you're still confusing of the power of Symbol-Resolver, there is also an example for you:
+If you're still confused about the power of **Symbol-Resolver**, there is also an example for you:
 
 ```python
 from utranspiler import transpile, func
