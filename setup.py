@@ -17,7 +17,7 @@ elif version_method.strip() == "autoinc":
 else:
     raise Exception("Invalid `version_method`. Check your .meta_version.")
 
-with Path('README.rst').open() as readme:
+with Path('README.md').open() as readme:
     readme = readme.read()
 
 setup(
