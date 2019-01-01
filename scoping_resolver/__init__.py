@@ -220,9 +220,8 @@ def _visit_cls(self: 'ScopeTagger', node: ast.ClassDef):
     node.bases = bases
     node.keywords = keywords
     node.decorator_list = decorator_list
-    node.body = body
-
-    return ScopedAst(node, new)
+    node.body = [ScopedAst(ast.Suite(body), new)]
+    return node
 
 
 def _visit_await(self: 'ScopeTagger', node: ast.Await):
@@ -313,8 +312,11 @@ def _visit_fn_def(self: 'ScopeTagger',
         new.entered.add(arg.arg)
 
     new_tagger = ScopeTagger(new)
-    node.body = [new_tagger.visit(each) for each in node.body]
-    return ScopedAst(node, new)
+    node.body = [
+        ScopedAst(
+            ast.Suite([new_tagger.visit(each) for each in node.body]), new)
+    ]
+    return node
 
 
 def _visit_lam(self: 'ScopeTagger', node: ast.Lambda):
@@ -333,8 +335,8 @@ def _visit_lam(self: 'ScopeTagger', node: ast.Lambda):
         new.entered.add(arg.arg)
 
     new_tagger = ScopeTagger(new)
-    node.body = new_tagger.visit(node.body)
-    return ScopedAst(node, new)
+    node.body = ScopedAst(new_tagger.visit(node.body), new)
+    return node
 
 
 class ScopeTagger(ast.NodeTransformer):
@@ -372,9 +374,13 @@ if __name__ == '__main__':
     import ast
 
     mod = ("""
-class h():
-    def docmodule(self, object, name=None, mod=None, *ignored):
-        lambda t: self.modulelink(t[1])
+v = 2
+def g(x):
+    def k(x):
+        return z + x
+    z = v + 2
+    z = k(1)
+    return k
 """)
     print(mod)
     mod = ast.parse(mod)
